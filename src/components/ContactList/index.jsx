@@ -2,10 +2,10 @@ import React from 'react';
 import ContactListItem from './ContactListItem';
 import PropTypes from 'prop-types';
 
-const ContactList = ({ filteredContacts, deleteContact }) => {
+const ContactList = ({ filterContact, deleteContact }) => {
   return (
     <ul>
-      {filteredContacts.map(contact => (
+      {filterContact.map(contact => (
         <ContactListItem
           key={contact.id}
           id={contact.id}
@@ -19,7 +19,7 @@ const ContactList = ({ filteredContacts, deleteContact }) => {
 };
 
 ContactList.propTypes = {
-  filteredContacts: PropTypes.arrayOf(
+  filterContact: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

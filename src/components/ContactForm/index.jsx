@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import styles from './index.module.css';
 import PropTypes from 'prop-types';
+import styles from './index.module.css';
 
 class ContactForm extends Component {
   initialState = {
@@ -12,14 +12,14 @@ class ContactForm extends Component {
     name: '',
     number: '',
   };
-  handleSubmit = event => {
-    event.preventDefault();
+  submitHandler = e => {
+    e.preventDefault();
     const singleContact = {
       name: this.state.name,
       number: this.state.number,
       id: uuidv4(),
     };
-    this.props.addToPhonebook(singleContact);
+    this.props.addPhonebook(singleContact);
     this.setState({ ...this.initialState });
   };
 
@@ -33,25 +33,26 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label name="name" className={styles.contactFormLable}>
+        <form onSubmit={this.submitHandler}>
+          <label className={styles.contactFormLable}> Name
             <input
               onChange={this.inputHandler}
               type="text"
               name="name"
-              placeholder="add name"
+              placeholder="Add name"
               value={name}
             ></input>
           </label>
-          <label name="number" className={styles.contactFormLable}>
+          <label className={styles.contactFormLable}> Number
             <input
               onChange={this.inputHandler}
               type="tel"
               name="number"
-              placeholder="add number"
+              placeholder="Add number"
               value={number}
             ></input>
           </label>
+
           <button type="submit">Add contact</button>
         </form>
       </>
@@ -60,7 +61,7 @@ class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  addToPhonebook: PropTypes.func.isRequired,
+  addPhonebook: PropTypes.func.isRequired,
 };
 
 export default ContactForm;
