@@ -12,14 +12,14 @@ class ContactForm extends Component {
     name: '',
     number: '',
   };
-  submitHandler = e => {
-    e.preventDefault();
-    const singleContact = {
+  submitHandler = event => {
+    event.preventDefault();
+    const contact = {
       name: this.state.name,
       number: this.state.number,
       id: uuidv4(),
     };
-    this.props.addPhonebook(singleContact);
+    this.props.addPhonebook(contact);
     this.setState({ ...this.initialState });
   };
 
@@ -33,27 +33,33 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <>
-        <form onSubmit={this.submitHandler}>
-          <label className={styles.contactFormLable}> Name
+        <form className={styles.form} onSubmit={this.submitHandler}>
+          <label className={styles.label}>
+            {' '}
+            Name
             <input
               onChange={this.inputHandler}
               type="text"
               name="name"
               placeholder="Add name"
               value={name}
+              className={styles.input}
             ></input>
           </label>
-          <label className={styles.contactFormLable}> Number
+          <label className={styles.label}>
+            {' '}
+            Number
             <input
               onChange={this.inputHandler}
               type="tel"
               name="number"
-              placeholder="Add number"
+              placeholder="111-11-11"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               value={number}
+              className={styles.input}
             ></input>
           </label>
-
-          <button type="submit">Add contact</button>
+          <button className={styles.button} type="submit">Add contact</button>
         </form>
       </>
     );

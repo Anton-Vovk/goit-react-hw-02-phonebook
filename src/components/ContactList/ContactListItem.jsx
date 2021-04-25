@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './index.module.css';
+import styles from '../ContactForm/index.module.css';
+import style from './index.module.css';
 
 const ContactListItem = ({ id, name, number, deleteContact }) => {
   return (
     <>
-      <li key={id}>
-        {name}:{number}
-        <button
-          className={styles.contactListItemBtn}
-          onClick={() => deleteContact(id)}
-        >
+      <li key={id} className={style.item}>
+        {name} : {number}
+        <button className={styles.button} onClick={() => deleteContact(id)}>
           Delete
         </button>
       </li>
